@@ -34,7 +34,7 @@ public class Customer {
 
             totalFrequentRenterPoints += frequentRenterPointsFor(thisRental);
             thisRentalAmount = rentalAmountFor(thisRental);
-            result += createStatementEntryForThisRental(thisRental.getMovie().getTitle(), thisRentalAmount);
+            result += createStatementEntryForThisRental(thisRental, thisRentalAmount);
 
             totalOfAllRentalAmounts += thisRentalAmount;
         }
@@ -92,7 +92,8 @@ public class Customer {
         return thisAmount;
     }
 
-    private String createStatementEntryForThisRental(String movieTitle, double thisAmount) {
+    private String createStatementEntryForThisRental(Rental rental, double thisAmount) {
+        String movieTitle = rental.getMovie().getTitle();
         return "\t" + movieTitle + "\t" + String.valueOf(thisAmount) + "\n";
     }
 
