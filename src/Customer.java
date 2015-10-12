@@ -94,12 +94,9 @@ public class Customer {
         return thisAmount;
     }
 
-
     private String createThisRentalsStatement(String movieTitle, double thisAmount) {
-        return "\t" + movieTitle + "\t"
-                + String.valueOf(thisAmount) + "\n";
+        return "\t" + movieTitle + "\t" + String.valueOf(thisAmount) + "\n";
     }
-
 
     private String createTotalHistoryStatement(double totalAmount, int frequentRenterPoints) {
         String result = "";
