@@ -26,25 +26,25 @@ public class Customer {
     }
 
     private String rentalHistoryStatement() {
-        double totalAmount = 0;
+        double totalOfAllRentalAmounts = 0;
         int totalFrequentRenterPoints = 0;
         String result = "";
         Enumeration rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
-            double thisAmount = 0;
+            double thisRentalAmount = 0;
             Rental thisRental = (Rental) rentals.nextElement();
 
-            totalFrequentRenterPoints += thisRentalsFrequentRenterPoints(thisRental);
-            thisAmount = totalAmount(thisRental);
-            result += createThisRentalsStatement(thisRental.getMovie().getTitle(), thisAmount);
+            totalFrequentRenterPoints += frequentRenterPointsFor(thisRental);
+            thisRentalAmount = rentalAmountFor(thisRental);
+            result += createStatementEntryForThisRental(thisRental.getMovie().getTitle(), thisRentalAmount);
 
-            totalAmount += thisAmount;
+            totalOfAllRentalAmounts += thisRentalAmount;
         }
-        result += createTotalHistoryStatement(totalAmount, totalFrequentRenterPoints);
+        result += createTotalHistoryStatement(totalOfAllRentalAmounts, totalFrequentRenterPoints);
         return result;
     }
 
-    private int thisRentalsFrequentRenterPoints(Rental rental) {
+    private int frequentRenterPointsFor(Rental rental) {
         int frequentRenterPoints = 1;
 
         if (rental.getMovie().getPriceCode() == Movie.PriceCode.NEW_RELEASE && rental.getDaysRented() > 1) {
@@ -53,7 +53,7 @@ public class Customer {
         return frequentRenterPoints;
     }
 
-    private double totalAmount(Rental rental) {
+    private double rentalAmountFor(Rental rental) {
         Movie.PriceCode priceCode = rental.getMovie().getPriceCode();
         int daysRented = rental.getDaysRented();
         double thisAmount = 0;
@@ -94,7 +94,7 @@ public class Customer {
         return thisAmount;
     }
 
-    private String createThisRentalsStatement(String movieTitle, double thisAmount) {
+    private String createStatementEntryForThisRental(String movieTitle, double thisAmount) {
         return "\t" + movieTitle + "\t" + String.valueOf(thisAmount) + "\n";
     }
 
