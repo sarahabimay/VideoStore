@@ -19,9 +19,7 @@ public class Customer {
 
     public String statement() {
         String result = "Rental Record for " + getName() + "\n";
-
         result += rentalHistoryStatement();
-
         return result;
     }
 
@@ -72,7 +70,6 @@ public class Customer {
                 thisAmount += (daysRented - 3) * 1.5;
             }
         }
-
         return thisAmount;
     }
 
