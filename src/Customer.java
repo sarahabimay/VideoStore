@@ -54,17 +54,17 @@ public class Customer {
     }
 
     private double rentalAmountFor(Rental rental) {
+        double thisAmount = 0;
         Movie.PriceCode priceCode = rental.getMovie().getPriceCode();
         int daysRented = rental.getDaysRented();
-        double thisAmount = 0;
 
-        thisAmount += totalAmountOnRegularPriceCodes(priceCode, daysRented);
-        thisAmount += totalAmountOnNewReleasePriceCodes(priceCode, daysRented);
-        thisAmount += totalAmountOnChildrensPriceCodes(priceCode, daysRented);
+        thisAmount += rentalAmountForRegularMovies(priceCode, daysRented);
+        thisAmount += rentalAmountForNewReleaseMovies(priceCode, daysRented);
+        thisAmount += rentalAmountForChildrensMovies(priceCode, daysRented);
         return thisAmount;
     }
 
-    private double totalAmountOnChildrensPriceCodes(Movie.PriceCode priceCode, int daysRented) {
+    private double rentalAmountForChildrensMovies(Movie.PriceCode priceCode, int daysRented) {
         double thisAmount = 0;
         if (priceCode == Movie.PriceCode.CHILDRENS) {
             thisAmount += 1.5;
@@ -72,10 +72,11 @@ public class Customer {
                 thisAmount += (daysRented - 3) * 1.5;
             }
         }
+
         return thisAmount;
     }
 
-    private double totalAmountOnNewReleasePriceCodes(Movie.PriceCode priceCode, int daysRented) {
+    private double rentalAmountForNewReleaseMovies(Movie.PriceCode priceCode, int daysRented) {
         double thisAmount = 0;
         if (priceCode == Movie.PriceCode.NEW_RELEASE) {
             thisAmount += daysRented * 3;
@@ -83,7 +84,7 @@ public class Customer {
         return thisAmount;
     }
 
-    private double totalAmountOnRegularPriceCodes(Movie.PriceCode priceCode, int daysRented) {
+    private double rentalAmountForRegularMovies(Movie.PriceCode priceCode, int daysRented) {
         double thisAmount = 0;
         if (priceCode == Movie.PriceCode.REGULAR) {
             thisAmount += 2;
