@@ -1,6 +1,6 @@
 public class Movie {
 
-    public enum PriceCode{
+    public enum PriceCode {
         CHILDRENS, REGULAR, NEW_RELEASE
     }
 
