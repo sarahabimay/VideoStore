@@ -27,25 +27,25 @@ public class Customer {
 
     private String rentalHistoryStatement() {
         double totalAmount = 0;
-        int frequentRenterPoints = 0;
+        int totalFrequentRenterPoints = 0;
         String result = "";
         Enumeration rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
             double thisAmount = 0;
             Rental thisRental = (Rental) rentals.nextElement();
 
-            frequentRenterPoints = totalFrequentRenterPoints(thisRental, frequentRenterPoints);
+            totalFrequentRenterPoints += thisRentalsFrequentRenterPoints(thisRental);
             thisAmount = totalAmount(thisRental);
             result += createThisRentalsStatement(thisRental.getMovie().getTitle(), thisAmount);
 
             totalAmount += thisAmount;
         }
-        result += createTotalHistoryStatement(totalAmount, frequentRenterPoints);
+        result += createTotalHistoryStatement(totalAmount, totalFrequentRenterPoints);
         return result;
     }
 
-    private int totalFrequentRenterPoints(Rental rental, int frequentRenterPoints) {
-        frequentRenterPoints++;
+    private int thisRentalsFrequentRenterPoints(Rental rental) {
+        int frequentRenterPoints = 1;
 
         if (rental.getMovie().getPriceCode() == Movie.PriceCode.NEW_RELEASE && rental.getDaysRented() > 1) {
             frequentRenterPoints++;
