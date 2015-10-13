@@ -47,14 +47,12 @@ public class Customer {
 
     private String createTotalHistoryStatement() {
         String result = "";
-        int totalFrequentRenterPoints = calculateFrequentRenterPoints();
-        double totalOfAllRentalAmounts = calculateAllRentalAmounts();
-        result += "You owed " + String.valueOf(totalOfAllRentalAmounts) + "\n";
-        result += "You earned " + String.valueOf(totalFrequentRenterPoints) + " frequent renter points\n";
+        result += "You owed " + String.valueOf(allRentalAmounts()) + "\n";
+        result += "You earned " + String.valueOf(frequentRenterPoints()) + " frequent renter points\n";
         return result;
     }
 
-    private int calculateFrequentRenterPoints() {
+    private int frequentRenterPoints() {
         int totalFrequentRenterPoints = 0;
         Enumeration rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
@@ -64,7 +62,7 @@ public class Customer {
         return totalFrequentRenterPoints;
     }
 
-    private double calculateAllRentalAmounts() {
+    private double allRentalAmounts() {
         double totalOfAllRentalAmounts = 0;
         Enumeration rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
