@@ -11,10 +11,6 @@ public class Rental {
         this.frequentRenterPoints = movie.frequentRenterPoints(daysRented);
     }
 
-    public int getDaysRented() {
-        return daysRented;
-    }
-
     public double getRentalAmount() {
         return rentalAmount;
     }
