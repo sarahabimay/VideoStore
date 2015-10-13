@@ -24,83 +24,49 @@ public class Customer {
     }
 
     private String rentalHistoryStatement() {
-        double totalOfAllRentalAmounts = 0;
-        int totalFrequentRenterPoints = 0;
+        String result = "";
+        result += createEachRentalStatementEntry();
+        result += createTotalHistoryStatement();
+        return result;
+    }
+
+    private String createEachRentalStatementEntry() {
         String result = "";
         Enumeration rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
-            double thisRentalAmount = 0;
             Rental thisRental = (Rental) rentals.nextElement();
-
-            totalFrequentRenterPoints += frequentRenterPointsFor(thisRental);
-            thisRentalAmount = rentalAmountFor(thisRental);
-            result += createStatementEntryFor(thisRental, thisRentalAmount);
-
-            totalOfAllRentalAmounts += thisRentalAmount;
+            result += thisRental.createStatement();
         }
-        result += createTotalHistoryStatement(totalOfAllRentalAmounts, totalFrequentRenterPoints);
         return result;
     }
 
-    private int frequentRenterPointsFor(Rental rental) {
-        int frequentRenterPoints = 1;
-
-        if (rental.getMovie().getPriceCode() == Movie.PriceCode.NEW_RELEASE && rental.getDaysRented() > 1) {
-            frequentRenterPoints++;
-        }
-        return frequentRenterPoints;
-    }
-
-    private double rentalAmountFor(Rental rental) {
-        double thisAmount = 0;
-        Movie.PriceCode priceCode = rental.getMovie().getPriceCode();
-        int daysRented = rental.getDaysRented();
-
-        thisAmount += rentalAmountForRegularMovies(priceCode, daysRented);
-        thisAmount += rentalAmountForNewReleaseMovies(priceCode, daysRented);
-        thisAmount += rentalAmountForChildrensMovies(priceCode, daysRented);
-        return thisAmount;
-    }
-
-    private double rentalAmountForChildrensMovies(Movie.PriceCode priceCode, int daysRented) {
-        double thisAmount = 0;
-        if (priceCode == Movie.PriceCode.CHILDRENS) {
-            thisAmount += 1.5;
-            if (daysRented > 3) {
-                thisAmount += (daysRented - 3) * 1.5;
-            }
-        }
-        return thisAmount;
-    }
-
-    private double rentalAmountForNewReleaseMovies(Movie.PriceCode priceCode, int daysRented) {
-        double thisAmount = 0;
-        if (priceCode == Movie.PriceCode.NEW_RELEASE) {
-            thisAmount += daysRented * 3;
-        }
-        return thisAmount;
-    }
-
-    private double rentalAmountForRegularMovies(Movie.PriceCode priceCode, int daysRented) {
-        double thisAmount = 0;
-        if (priceCode == Movie.PriceCode.REGULAR) {
-            thisAmount += 2;
-            if (daysRented > 2) {
-                thisAmount += (daysRented - 2) * 1.5;
-            }
-        }
-        return thisAmount;
-    }
-
-    private String createStatementEntryFor(Rental rental, double thisAmount) {
-        String movieTitle = rental.getMovie().getTitle();
-        return "\t" + movieTitle + "\t" + String.valueOf(thisAmount) + "\n";
-    }
-
-    private String createTotalHistoryStatement(double totalAmount, int frequentRenterPoints) {
+    private String createTotalHistoryStatement() {
         String result = "";
-        result += "You owed " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points\n";
+        int totalFrequentRenterPoints = calculateFrequentRenterPoints();
+        double totalOfAllRentalAmounts = calculateAllRentalAmounts();
+        result += "You owed " + String.valueOf(totalOfAllRentalAmounts) + "\n";
+        result += "You earned " + String.valueOf(totalFrequentRenterPoints) + " frequent renter points\n";
         return result;
     }
+
+    private double calculateAllRentalAmounts() {
+        double totalOfAllRentalAmounts = 0;
+        Enumeration rentals = this.rentals.elements();
+        while (rentals.hasMoreElements()) {
+            Rental thisRental = (Rental) rentals.nextElement();
+            totalOfAllRentalAmounts += thisRental.rentalAmount();
+        }
+        return totalOfAllRentalAmounts;
+    }
+
+    private int calculateFrequentRenterPoints() {
+        int totalFrequentRenterPoints = 0;
+        Enumeration rentals = this.rentals.elements();
+        while (rentals.hasMoreElements()) {
+            Rental thisRental = (Rental) rentals.nextElement();
+            totalFrequentRenterPoints += thisRental.frequentRenterPointsFor();
+        }
+        return totalFrequentRenterPoints;
+    }
+
 }
