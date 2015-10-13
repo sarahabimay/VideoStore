@@ -16,11 +16,19 @@ public class Movie {
         return priceCode;
     }
 
-    public void setPriceCode(PriceCode code) {
-        priceCode = code;
-    }
-
     public String getTitle() {
         return title;
+    }
+
+    public boolean isChildrens() {
+        return priceCode == PriceCode.CHILDRENS;
+    }
+
+    public boolean isRegular() {
+        return priceCode == PriceCode.REGULAR;
+    }
+
+    public boolean isNewRelease() {
+        return priceCode == PriceCode.NEW_RELEASE;
     }
 }

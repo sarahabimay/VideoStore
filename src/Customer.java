@@ -1,5 +1,5 @@
-import java.util.Vector;
 import java.util.Enumeration;
+import java.util.Vector;
 
 public class Customer {
     private String name;
@@ -35,9 +35,14 @@ public class Customer {
         Enumeration rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
             Rental thisRental = (Rental) rentals.nextElement();
-            result += thisRental.createStatement();
+            result += createStatement(thisRental);
         }
         return result;
+    }
+
+    private String createStatement(Rental rental) {
+        String movieTitle = rental.getMovieTitle();
+        return "\t" + movieTitle + "\t" + String.valueOf(rental.getRentalAmount()) + "\n";
     }
 
     private String createTotalHistoryStatement() {
@@ -47,16 +52,6 @@ public class Customer {
         result += "You owed " + String.valueOf(totalOfAllRentalAmounts) + "\n";
         result += "You earned " + String.valueOf(totalFrequentRenterPoints) + " frequent renter points\n";
         return result;
-    }
-
-    private double calculateAllRentalAmounts() {
-        double totalOfAllRentalAmounts = 0;
-        Enumeration rentals = this.rentals.elements();
-        while (rentals.hasMoreElements()) {
-            Rental thisRental = (Rental) rentals.nextElement();
-            totalOfAllRentalAmounts += thisRental.getRentalAmount();
-        }
-        return totalOfAllRentalAmounts;
     }
 
     private int calculateFrequentRenterPoints() {
@@ -69,4 +64,13 @@ public class Customer {
         return totalFrequentRenterPoints;
     }
 
+    private double calculateAllRentalAmounts() {
+        double totalOfAllRentalAmounts = 0;
+        Enumeration rentals = this.rentals.elements();
+        while (rentals.hasMoreElements()) {
+            Rental thisRental = (Rental) rentals.nextElement();
+            totalOfAllRentalAmounts += thisRental.getRentalAmount();
+        }
+        return totalOfAllRentalAmounts;
+    }
 }
