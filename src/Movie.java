@@ -7,9 +7,9 @@ public class Movie {
     private String title;
     private PriceCode priceCode;
 
-    public Movie(String title, PriceCode code) {
+    public Movie(String title) {
         this.title = title;
-        this.priceCode = code;
+//        this.priceCode = code;
     }
 
     public PriceCode getPriceCode() {
@@ -20,15 +20,11 @@ public class Movie {
         return title;
     }
 
-    public boolean isChildrens() {
-        return priceCode == PriceCode.CHILDRENS;
+    public double rentalAmount(int daysRented) {
+        return 0;
     }
 
-    public boolean isRegular() {
-        return priceCode == PriceCode.REGULAR;
-    }
-
-    public boolean isNewRelease() {
-        return priceCode == PriceCode.NEW_RELEASE;
+    public int frequentRenterPoints(int daysRented){
+        return 0;
     }
 }
