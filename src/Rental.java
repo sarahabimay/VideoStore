@@ -1,21 +1,29 @@
 public class Rental {
     private Movie movie;
     private int daysRented;
+    private double rentalAmount;
+    private int frequentRenterPoints;
 
     public Rental(Movie movie, int daysRented) {
         this.movie = movie;
         this.daysRented = daysRented;
+        this.rentalAmount = rentalAmount();
+        this.frequentRenterPoints = frequentRenterPoints();
     }
 
     public int getDaysRented() {
         return daysRented;
     }
 
-    public Movie getMovie() {
-        return movie;
+    public double getRentalAmount() {
+        return rentalAmount;
     }
 
-    public int frequentRenterPointsFor() {
+    public int getFrequentRenterPoints() {
+        return frequentRenterPoints;
+    }
+
+    private int frequentRenterPoints() {
         int frequentRenterPoints = 1;
 
         if (this.movie.getPriceCode() == Movie.PriceCode.NEW_RELEASE && getDaysRented() > 1) {
@@ -24,7 +32,7 @@ public class Rental {
         return frequentRenterPoints;
     }
 
-    public double rentalAmount() {
+    private double rentalAmount() {
         double thisAmount = 0;
 
         thisAmount += rentalAmountForRegularMovies();
@@ -65,6 +73,6 @@ public class Rental {
 
     public String createStatement() {
         String movieTitle = movie.getTitle();
-        return "\t" + movieTitle + "\t" + String.valueOf(rentalAmount()) + "\n";
+        return "\t" + movieTitle + "\t" + String.valueOf(rentalAmount) + "\n";
     }
 }

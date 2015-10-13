@@ -25,12 +25,12 @@ public class Customer {
 
     private String rentalHistoryStatement() {
         String result = "";
-        result += createEachRentalStatementEntry();
+        result += createEachRentalEntryForStatement();
         result += createTotalHistoryStatement();
         return result;
     }
 
-    private String createEachRentalStatementEntry() {
+    private String createEachRentalEntryForStatement() {
         String result = "";
         Enumeration rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
@@ -54,7 +54,7 @@ public class Customer {
         Enumeration rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
             Rental thisRental = (Rental) rentals.nextElement();
-            totalOfAllRentalAmounts += thisRental.rentalAmount();
+            totalOfAllRentalAmounts += thisRental.getRentalAmount();
         }
         return totalOfAllRentalAmounts;
     }
@@ -64,7 +64,7 @@ public class Customer {
         Enumeration rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
             Rental thisRental = (Rental) rentals.nextElement();
-            totalFrequentRenterPoints += thisRental.frequentRenterPointsFor();
+            totalFrequentRenterPoints += thisRental.getFrequentRenterPoints();
         }
         return totalFrequentRenterPoints;
     }
