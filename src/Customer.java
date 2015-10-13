@@ -48,11 +48,11 @@ public class Customer {
     private String createTotalHistoryStatement() {
         String result = "";
         result += "You owed " + String.valueOf(totalRentalAmount()) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints()) + " frequent renter points\n";
+        result += "You earned " + String.valueOf(totalFrequentRenterPoints()) + " frequent renter points\n";
         return result;
     }
 
-    private int frequentRenterPoints() {
+    private int totalFrequentRenterPoints() {
         int totalFrequentRenterPoints = 0;
         Enumeration rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
