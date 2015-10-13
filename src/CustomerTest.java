@@ -74,7 +74,14 @@ public class CustomerTest {
         customer.addRental(new Rental(regular1, 1));
         customer.addRental(new Rental(regular2, 2));
         customer.addRental(new Rental(regular3, 3));
-
         assertEquals("Rental Record for Fred\n\tPlan 9 from Outer Space\t2.0\n\t8 1/2\t2.0\n\tEraserhead\t3.5\nYou owed 7.5\nYou earned 3 frequent renter points\n", customer.statement());
+    }
+
+    @Test
+    public void mixedMovieTypesStatement() {
+        customer.addRental(new Rental(regular1,1));
+        customer.addRental(new Rental(childrens1,1));
+        customer.addRental(new Rental(newRelease1,1));
+        assertEquals("Rental Record for Fred\n\tPlan 9 from Outer Space\t2.0\n\tThe Tigger Movie\t1.5\n\tThe Cell\t3.0\nYou owed 6.5\nYou earned 3 frequent renter points\n", customer.statement());
     }
 }
