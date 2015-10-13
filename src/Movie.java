@@ -1,4 +1,4 @@
-public class Movie {
+public abstract class Movie {
 
     private String title;
 
@@ -10,11 +10,6 @@ public class Movie {
         return title;
     }
 
-    public double rentalAmount(int daysRented) {
-        return 0;
-    }
-
-    public int frequentRenterPoints(int daysRented) {
-        return 0;
-    }
+    public abstract double rentalAmount(int daysRented);
+    public abstract int frequentRenterPoints(int daysRented);
 }
