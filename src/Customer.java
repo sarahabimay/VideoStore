@@ -35,12 +35,12 @@ public class Customer {
         Enumeration rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
             Rental thisRental = (Rental) rentals.nextElement();
-            result += createStatement(thisRental);
+            result += createRentalEntryForStatement(thisRental);
         }
         return result;
     }
 
-    private String createStatement(Rental rental) {
+    private String createRentalEntryForStatement(Rental rental) {
         String movieTitle = rental.getMovieTitle();
         return "\t" + movieTitle + "\t" + String.valueOf(rental.getRentalAmount()) + "\n";
     }
