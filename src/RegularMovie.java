@@ -3,7 +3,7 @@ public class RegularMovie extends Movie {
         super(title);
     }
 
-    public double rentalAmount(int daysRented){
+    public double rentalAmount(int daysRented) {
         double thisAmount = 2;
         if (daysRented > 2) {
             thisAmount += (daysRented - 2) * 1.5;
@@ -11,7 +11,7 @@ public class RegularMovie extends Movie {
         return thisAmount;
     }
 
-    public int frequentRenterPoints(int daysRented){
+    public int frequentRenterPoints(int daysRented) {
         return 1;
     }
 }

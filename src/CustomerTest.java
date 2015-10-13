@@ -49,7 +49,7 @@ public class CustomerTest {
 
     @Test
     public void testDualChildrensStatement() {
-        customer.addRental(new Rental(childrens1,3));
+        customer.addRental(new Rental(childrens1, 3));
         customer.addRental(new Rental(childrens2, 5));
         assertEquals("Rental Record for Fred\n\tThe Tigger Movie\t1.5\n\tCinderella\t4.5\nYou owed 6.0\nYou earned 2 frequent renter points\n", customer.statement());
     }
@@ -79,9 +79,9 @@ public class CustomerTest {
 
     @Test
     public void mixedMovieTypesStatement() {
-        customer.addRental(new Rental(regular1,1));
-        customer.addRental(new Rental(childrens1,1));
-        customer.addRental(new Rental(newRelease1,1));
+        customer.addRental(new Rental(regular1, 1));
+        customer.addRental(new Rental(childrens1, 1));
+        customer.addRental(new Rental(newRelease1, 1));
         assertEquals("Rental Record for Fred\n\tPlan 9 from Outer Space\t2.0\n\tThe Tigger Movie\t1.5\n\tThe Cell\t3.0\nYou owed 6.5\nYou earned 3 frequent renter points\n", customer.statement());
     }
 }

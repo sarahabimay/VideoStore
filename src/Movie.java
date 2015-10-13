@@ -14,7 +14,7 @@ public class Movie {
         return 0;
     }
 
-    public int frequentRenterPoints(int daysRented){
+    public int frequentRenterPoints(int daysRented) {
         return 0;
     }
 }

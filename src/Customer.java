@@ -41,8 +41,7 @@ public class Customer {
     }
 
     private String createRentalEntryForStatement(Rental rental) {
-        String movieTitle = rental.getMovieTitle();
-        return "\t" + movieTitle + "\t" + String.valueOf(rental.getRentalAmount()) + "\n";
+        return "\t" + rental.getMovieTitle() + "\t" + String.valueOf(rental.getRentalAmount()) + "\n";
     }
 
     private String createTotalHistoryStatement() {
