@@ -30,7 +30,7 @@ public class Rental {
     private int frequentRenterPoints() {
         int frequentRenterPoints = 1;
 
-        if (this.movie.getPriceCode() == Movie.PriceCode.NEW_RELEASE && getDaysRented() > 1) {
+        if (this.movie.isNewRelease() && getDaysRented() > 1) {
             frequentRenterPoints++;
         }
         return frequentRenterPoints;
