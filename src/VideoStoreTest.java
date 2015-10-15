@@ -1,7 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.TestCase.*;
+import static org.junit.Assert.assertEquals;
+
 
 public class VideoStoreTest {
 
@@ -24,31 +25,36 @@ public class VideoStoreTest {
     }
 
     @Test
-    public void testSingleNewReleaseStatement() {
+    public void singleNewReleaseStatementData() {
         customer.addRental(new Rental(newRelease1, 3));
-        assertEquals("Rental Record for Customer\n\t" +
-                        "New Release 1\t9.0\nYou owed 9.0\n" +
-                        "You earned 2 frequent renter points\n",
-                customer.statement());
+        customer.statement();
+        assertEquals(9.0, customer.getTotalRentalsAmount(), 0.001);
+        assertEquals(2, customer.getFrequentRenterPoints());
     }
 
     @Test
-    public void testDualNewReleaseStatement() {
+    public void dualNewReleaseStatementData() {
         customer.addRental(new Rental(newRelease1, 3));
         customer.addRental(new Rental(newRelease2, 3));
-        assertEquals("Rental Record for Customer\n\t" +
-                        "New Release 1\t9.0\n\tNew Release 2\t9.0\n" +
-                        "You owed 18.0\nYou earned 4 frequent renter points\n",
-                customer.statement());
+        customer.statement();
+        assertEquals(18.0, customer.getTotalRentalsAmount(), 0.001);
+        assertEquals(4, customer.getFrequentRenterPoints());
     }
 
     @Test
-    public void testSingleChildrensStatement() {
+    public void singleChildrensStatementData() {
         customer.addRental(new Rental(childrens, 3));
-        assertEquals("Rental Record for Customer\n\t" +
-                        "Childrens\t1.5\nYou owed 1.5\n" +
-                        "You earned 1 frequent renter points\n",
-                customer.statement());
+        customer.statement();
+        assertEquals(1.5, customer.getTotalRentalsAmount(), 0.001);
+        assertEquals(1, customer.getFrequentRenterPoints());
+    }
+
+    @Test
+    public void singleRegularStatementData() {
+        customer.addRental(new Rental(regular1, 2));
+        customer.statement();
+        assertEquals(2.0, customer.getTotalRentalsAmount(), 0.001);
+        assertEquals(1, customer.getFrequentRenterPoints());
     }
 
     @Test
