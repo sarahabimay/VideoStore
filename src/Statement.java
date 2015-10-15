@@ -30,9 +30,9 @@ public class Statement {
         return customerName;
     }
 
-    public String statement() {
+    public String generate() {
         String statementText = header();
-        statementText += generate();
+        statementText += rentalLines();
         statementText += footer();
         return statementText;
     }
@@ -48,7 +48,7 @@ public class Statement {
         return result;
     }
 
-    private String generate() {
+    private String rentalLines() {
         String result = "";
         for (Rental rental : rentals) {
             double thisAmount = 0;
