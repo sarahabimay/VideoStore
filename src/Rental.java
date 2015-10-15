@@ -15,4 +15,12 @@ public class Rental
 
 	private Movie movie;
 	private int daysRented;
+
+	public int getPriceCode() {
+		return movie.getPriceCode();
+	}
+
+	public String getTitle() {
+		return movie.getTitle();
+	}
 }
