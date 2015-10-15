@@ -29,12 +29,16 @@ public class Statement {
     }
 
     public String generate() {
-        totalRentalsAmount = 0;
-        frequentRenterPoints = 0;
+        clearTotals();
         String statementText = header();
         statementText += rentalLines();
         statementText += footer();
         return statementText;
+    }
+
+    private void clearTotals() {
+        totalRentalsAmount = 0;
+        frequentRenterPoints = 0;
     }
 
     private String header() {
