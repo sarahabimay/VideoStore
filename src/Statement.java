@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-import java.util.Enumeration;
 
 public class Statement {
     private String customerName;
     private List<Rental> rentals = new ArrayList<Rental>();
+    private double totalRentalsAmount;
+    private int frequentRenterPoints;
 
     public double getTotalRentalsAmount() {
         return totalRentalsAmount;
@@ -15,8 +15,6 @@ public class Statement {
         return frequentRenterPoints;
     }
 
-    private double totalRentalsAmount = 0;
-    private int frequentRenterPoints = 0;
 
     public Statement(String name) {
         this.customerName = name;
@@ -31,6 +29,8 @@ public class Statement {
     }
 
     public String generate() {
+        totalRentalsAmount = 0;
+        frequentRenterPoints = 0;
         String statementText = header();
         statementText += rentalLines();
         statementText += footer();
