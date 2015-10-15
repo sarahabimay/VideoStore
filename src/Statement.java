@@ -24,10 +24,6 @@ public class Statement {
         rentals.add(rental);
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
-
     public String generate() {
         clearTotals();
         String statementText = header();
@@ -42,14 +38,11 @@ public class Statement {
     }
 
     private String header() {
-        return "Rental Record for " + getCustomerName() + "\n";
+        return String.format("Rental Record for %s\n", customerName);
     }
 
     private String footer() {
-        String result = "";
-        result += "You owed " + String.valueOf(totalRentalsAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points\n";
-        return result;
+        return String.format("You owed %.1f\nYou earned %d frequent renter points\n", totalRentalsAmount, frequentRenterPoints);
     }
 
     private String rentalLines() {
