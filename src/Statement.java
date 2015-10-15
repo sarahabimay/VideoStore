@@ -31,8 +31,26 @@ public class Statement {
     }
 
     public String statement() {
-        String result = "Rental Record for " + getCustomerName() + "\n";
-        for( Rental rental : rentals){
+        String statementText = header();
+        statementText += generate();
+        statementText += footer();
+        return statementText;
+    }
+
+    private String header() {
+        return "Rental Record for " + getCustomerName() + "\n";
+    }
+
+    private String footer() {
+        String result = "";
+        result += "You owed " + String.valueOf(totalRentalsAmount) + "\n";
+        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points\n";
+        return result;
+    }
+
+    private String generate() {
+        String result = "";
+        for (Rental rental : rentals) {
             double thisAmount = 0;
 
             // determines the amount for each line
@@ -63,11 +81,6 @@ public class Statement {
             totalRentalsAmount += thisAmount;
 
         }
-
-        result += "You owed " + String.valueOf(totalRentalsAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points\n";
-
-
         return result;
     }
 
