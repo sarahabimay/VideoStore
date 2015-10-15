@@ -19,7 +19,7 @@ public class VideoStoreTest {
 
     @Before
     public void setUp() {
-        statement = new Statement("Customer");
+        statement = new Statement("Statement");
         release1 = new NewReleaseMovie("New Release1");
         release2 = new NewReleaseMovie("New Release2");
         release3 = new NewReleaseMovie("New Release3");
@@ -66,7 +66,7 @@ public class VideoStoreTest {
     @Test
     public void formatOfStatement() {
         statement.addRental(new Rental(childrens1, 2));
-        assertEquals("videoStore.Rental Record for Customer\n\t" +
+        assertEquals("videoStore.Rental Record for Statement\n\t" +
                         "Children1\t1.5\nYou owed 1.5\n" +
                         "You earned 1 frequent renter points\n",
                 statement.generate());
