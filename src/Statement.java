@@ -67,10 +67,10 @@ public class Statement {
 
     private int generateFrequentRenterPoints(Rental rental) {
         int frequentRenterPoints = 1;
-        
-        if (rental.getPriceCode() == Movie.NEW_RELEASE
-                && rental.getDaysRented() > 1)
+        boolean bonusIsEarned = rental.getPriceCode() == Movie.NEW_RELEASE && rental.getDaysRented() > 1;
+        if (bonusIsEarned) {
             frequentRenterPoints++;
+        }
         return frequentRenterPoints;
     }
 
