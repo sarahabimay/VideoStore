@@ -1,34 +1,16 @@
 public class RegularMovie extends Movie {
-    public RegularMovie(String title, int type) {
-        super(title, type);
+    public RegularMovie(String title) {
+        super(title);
     }
 
     public double generateAmount(int daysRented) {
-        double rentalAmount = 0.0;
-        switch (getPriceCode()) {
-            case REGULAR:
-                rentalAmount += 2;
-                if (daysRented > 2)
-                    rentalAmount += (daysRented - 2) * 1.5;
-                break;
-            case NEW_RELEASE:
-                rentalAmount += daysRented * 3;
-                break;
-            case CHILDRENS:
-                rentalAmount += 1.5;
-                if (daysRented > 3)
-                    rentalAmount += (daysRented - 3) * 1.5;
-                break;
-        }
+        double rentalAmount = 2.0;
+        if (daysRented > 2)
+            rentalAmount += (daysRented - 2) * 1.5;
         return rentalAmount;
     }
 
     public int generateFrequentRenterPoints(int daysRented) {
-        int frequentRenterPoints = 1;
-        boolean bonusIsEarned = getPriceCode() == NEW_RELEASE && daysRented > 1;
-        if (bonusIsEarned) {
-            frequentRenterPoints++;
-        }
-        return frequentRenterPoints;
+        return 1;
     }
 }
